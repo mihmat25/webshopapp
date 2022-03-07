@@ -1,6 +1,7 @@
 package com.shop.webshop.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,11 +12,9 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "user_name")
-    private String userName;
-
-    @Column(name = "client")
-    private UserAccount client;
+    @Column(name = "user")
+    @ManyToOne
+    private User user;
 
     @Column(name = "user_address")
     private String userAddress;
@@ -23,14 +22,12 @@ public class Order {
     @Column(name = "total_cost")
     private Double totalCost;
 
-    @Column(name = "delivery_address")
-    private String deliveryAddress;
-
     @Column(name = "date_of_submission")
     private Date dateOfSubmission;
 
     @Column(name = "order_lines")
-    private List<OrderLine> orderLines;
+    @OneToMany(mappedBy = "order")
+    private List<OrderLine> orderLines = new ArrayList<>();
 
     @Column(name = "status")
     private Status status;
@@ -43,20 +40,12 @@ public class Order {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public UserAccount getClient() {
-        return client;
-    }
-
-    public void setClient(UserAccount client) {
-        this.client = client;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getUserAddress() {
@@ -73,14 +62,6 @@ public class Order {
 
     public void setTotalCost(Double totalCost) {
         this.totalCost = totalCost;
-    }
-
-    public String getDeliveryAddress() {
-        return deliveryAddress;
-    }
-
-    public void setDeliveryAddress(String deliveryAddress) {
-        this.deliveryAddress = deliveryAddress;
     }
 
     public Date getDateOfSubmission() {

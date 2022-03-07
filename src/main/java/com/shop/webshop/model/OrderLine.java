@@ -1,10 +1,18 @@
 package com.shop.webshop.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity
 public class OrderLine {
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column()
+    @ManyToOne
+    private Order order;
 
     @Column(name = "product")
     private Product product;
@@ -14,6 +22,22 @@ public class OrderLine {
 
     @Column(name = "product_price")
     private Double productPrice;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 
     public Product getProduct() {
         return product;
