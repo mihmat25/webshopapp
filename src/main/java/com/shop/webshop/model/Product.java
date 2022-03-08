@@ -2,6 +2,8 @@ package com.shop.webshop.model;
 
 import javax.persistence.*;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Product {
@@ -26,11 +28,15 @@ public class Product {
     @Column(name = "price")
     private Double price;
 
-    @Column(name = "productType")
+    @Column(name = "product_type")
     private ProductType productType;
 
     @Column(name = "stock")
     private Integer stock;
+
+    @Column(name = "order_lines")
+    @OneToMany(mappedBy = "product")
+    private List<OrderLine> orderLines = new ArrayList<>() ;
 
 
     public Integer getId() {
@@ -95,5 +101,13 @@ public class Product {
 
     public void setStock(Integer stock) {
         this.stock = stock;
+    }
+
+    public List<OrderLine> getOrderLines() {
+        return orderLines;
+    }
+
+    public void setOrderLines(List<OrderLine> orderLines) {
+        this.orderLines = orderLines;
     }
 }
