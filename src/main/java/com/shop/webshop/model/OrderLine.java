@@ -10,11 +10,12 @@ public class OrderLine {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column()
+    @Column(name = "order")
     @ManyToOne
     private Order order;
 
     @Column(name = "product")
+    @ManyToOne
     private Product product;
 
     @Column(name = "number_of_products")
