@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Entity
+@Entity(name = "customer_order")
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "user")
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Column(name = "user_address")
@@ -25,7 +25,6 @@ public class Order {
     @Column(name = "date_of_submission")
     private Date dateOfSubmission;
 
-    @Column(name = "order_lines")
     @OneToMany(mappedBy = "order")
     private List<OrderLine> orderLines = new ArrayList<>();
 

@@ -23,7 +23,7 @@ public class Product {
     private URL thumbnail;
 
     @ManyToOne
-    @Column(name = "category")
+    @JoinColumn(name = "category_id")
     private Category category;
 
     @Column(name = "price")
@@ -35,7 +35,6 @@ public class Product {
     @Column(name = "stock")
     private Integer stock;
 
-    @Column(name = "order_lines")
     @OneToMany(mappedBy = "product")
     private List<OrderLine> orderLines = new ArrayList<>();
 

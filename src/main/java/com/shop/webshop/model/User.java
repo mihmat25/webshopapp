@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
+@Entity(name = "user_account")
 public class User {
 
     @Id
@@ -30,7 +30,6 @@ public class User {
     @Column(name = "role")
     private Role role;
 
-    @Column
     @OneToMany(mappedBy = "user")
     private List<Order> orders = new ArrayList<>();
 
