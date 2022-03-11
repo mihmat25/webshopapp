@@ -17,7 +17,7 @@ public class OrderMapper {
         return order;
     }
 
-    public static OrderFullDto orderFullDto(Order order) {
+    public static OrderFullDto orderToFullDto(Order order) {
 
         OrderFullDto orderFullDto = new OrderFullDto();
         orderFullDto.setUser(order.getUser());
