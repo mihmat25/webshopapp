@@ -1,7 +1,7 @@
 package com.shop.webshop.mapper;
 
-import com.shop.webshop.dto.productdto.UserCreateDto;
-import com.shop.webshop.dto.productdto.UserFullDto;
+import com.shop.webshop.dto.userdto.UserCreateDto;
+import com.shop.webshop.dto.userdto.UserFullDto;
 import com.shop.webshop.model.User;
 
 public class UserMapper {

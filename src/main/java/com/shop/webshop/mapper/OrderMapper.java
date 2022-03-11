@@ -1,7 +1,7 @@
 package com.shop.webshop.mapper;
 
-import com.shop.webshop.dto.productdto.OrderCreateDto;
-import com.shop.webshop.dto.productdto.OrderFullDto;
+import com.shop.webshop.dto.orderdto.OrderCreateDto;
+import com.shop.webshop.dto.orderdto.OrderFullDto;
 import com.shop.webshop.model.Order;
 
 public class OrderMapper {
