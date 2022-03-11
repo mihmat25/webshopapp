@@ -1,7 +1,7 @@
 package com.shop.webshop.mapper;
 
-import com.shop.webshop.dto.productdto.CategoryCreateDto;
-import com.shop.webshop.dto.productdto.CategoryFullDto;
+import com.shop.webshop.dto.categorydto.CategoryCreateDto;
+import com.shop.webshop.dto.categorydto.CategoryFullDto;
 import com.shop.webshop.model.Category;
 
 public class CategoryMapper {
