@@ -10,7 +10,7 @@ public class ProductFullDto {
     private String name;
     private String description;
     private URL thumbnail;
-    private Category category;
+    private Integer categoryId;
     private Double price;
     private ProductType productType;
     private Integer stock;
@@ -48,12 +48,12 @@ public class ProductFullDto {
         this.thumbnail = thumbnail;
     }
 
-    public Category getCategory() {
-        return category;
+    public Integer getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 
     public Double getPrice() {

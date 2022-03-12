@@ -2,9 +2,12 @@ package com.shop.webshop.mapper;
 
 import com.shop.webshop.dto.orderlinedto.OrderLineCreateDto;
 import com.shop.webshop.dto.orderlinedto.OrderLineFullDto;
+import com.shop.webshop.dto.productdto.ProductResponseDto;
 import com.shop.webshop.model.OrderLine;
 
 public class OrderLineMapper {
+
+
     public static OrderLine orderLineToEntity(OrderLineCreateDto orderLineCreateDto) {
         OrderLine orderLine = new OrderLine();
         orderLine.setOrder(orderLineCreateDto.getOrder());
@@ -17,8 +20,9 @@ public class OrderLineMapper {
 
     public static OrderLineFullDto orderLineToFullDto(OrderLine orderLine) {
         OrderLineFullDto orderLineFullDto = new OrderLineFullDto();
-        orderLineFullDto.setOrder(orderLine.getOrder());
-        orderLineFullDto.setProduct(orderLine.getProduct());
+        // set the id
+        orderLineFullDto.setOrderId(orderLine.getOrder().getId());
+        orderLineFullDto.setProductId(orderLine.getProduct().getId());
         orderLineFullDto.setProductPrice(orderLine.getProductPrice());
         orderLineFullDto.setNumberOfProducts(orderLine.getNumberOfProducts());
 

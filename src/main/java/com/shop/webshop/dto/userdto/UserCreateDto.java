@@ -3,27 +3,17 @@ package com.shop.webshop.dto.userdto;
 import com.shop.webshop.model.Role;
 
 public class UserCreateDto {
-    private String firstName;
-    private String lastName;
+    private String userName;
     private String email;
     private String password;
     private String address;
-    private Role role;
 
-    public String getFirstName() {
-        return firstName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getEmail() {
@@ -50,11 +40,4 @@ public class UserCreateDto {
         this.address = address;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
 }

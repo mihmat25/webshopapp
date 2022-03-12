@@ -14,7 +14,8 @@ public class CategoryMapper {
 
     public static CategoryFullDto categoryToFullDto(Category category) {
         CategoryFullDto categoryFullDto = new CategoryFullDto();
-        categoryFullDto.setName(categoryFullDto.getName());
+        categoryFullDto.setId(category.getId());
+        categoryFullDto.setName(category.getName());
 
         return categoryFullDto;
     }

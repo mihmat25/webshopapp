@@ -13,4 +13,7 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
+
+    // TODO @Post  pe /users cu usename si parola intr-un obiect de tipul
+    // return a user object also with id
 }

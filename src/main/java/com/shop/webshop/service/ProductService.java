@@ -2,6 +2,7 @@ package com.shop.webshop.service;
 
 import com.shop.webshop.dto.productdto.ProductCreateDto;
 import com.shop.webshop.dto.productdto.ProductFullDto;
+import com.shop.webshop.model.Product;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface ProductService {
     ProductFullDto update(ProductCreateDto productCreateDto);
 
     void delete(Integer id);
+
+    Product addProductToCategory(Integer productId, Integer categoryId);
 }

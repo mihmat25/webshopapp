@@ -1,12 +1,19 @@
 package com.shop.webshop.dto.orderlinedto;
 
+import com.shop.webshop.dto.productdto.ProductResponseDto;
 import com.shop.webshop.model.Order;
 import com.shop.webshop.model.Product;
 
 public class OrderLineFullDto {
     private Integer id;
-    private Order order;
-    private Product product;
+
+    // STRONG separation between layers
+    // ce avem in dto/controller <- expuse catre exterior
+    // NU dorim legaturi directe cu layer-ul de model
+    // in dto avem doar dtos
+
+    private Integer orderId;
+    private Integer productId;
     private Integer numberOfProducts;
     private Double productPrice;
 
@@ -18,20 +25,20 @@ public class OrderLineFullDto {
         this.id = id;
     }
 
-    public Order getOrder() {
-        return order;
+    public Integer getOrderId() {
+        return orderId;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
     }
 
-    public Product getProduct() {
-        return product;
+    public Integer getProductId() {
+        return productId;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 
     public Integer getNumberOfProducts() {

@@ -7,8 +7,7 @@ import com.shop.webshop.model.User;
 public class UserMapper {
     public static User userToEntity(UserCreateDto userCreateDto) {
         User user = new User();
-        user.setFirstName(userCreateDto.getFirstName());
-        user.setLastName(userCreateDto.getLastName());
+        user.setUserName(userCreateDto.getUserName());
         user.setEmail(userCreateDto.getEmail());
         user.setPassword(userCreateDto.getPassword());
         user.setAddress(userCreateDto.getAddress());
@@ -18,10 +17,8 @@ public class UserMapper {
 
     public static UserFullDto userToFullDto(User user) {
         UserFullDto userFullDto = new UserFullDto();
-        userFullDto.setFirstName(user.getFirstName());
-        userFullDto.setLastName(user.getLastName());
+        userFullDto.setUserName(user.getUserName());
         userFullDto.setEmail(user.getEmail());
-        userFullDto.setPassword(user.getPassword());
         userFullDto.setAddress(user.getAddress());
 
         return userFullDto;

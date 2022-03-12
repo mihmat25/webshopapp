@@ -1,9 +1,12 @@
 package com.shop.webshop.dto.orderdto;
 
+import com.shop.webshop.dto.orderlinedto.OrderLineFullDto;
+import com.shop.webshop.model.Order;
 import com.shop.webshop.model.Status;
 import com.shop.webshop.model.User;
 
 import java.util.Date;
+import java.util.List;
 
 public class OrderFullDto {
     private Integer id;
@@ -12,6 +15,16 @@ public class OrderFullDto {
     private Double totalCost;
     private Date dateOfSubmission;
     private Status status;
+    // TODO add orderlist
+    private List<OrderLineFullDto> orderLines;
+
+    public List<OrderLineFullDto> getOrderLines() {
+        return orderLines;
+    }
+
+    public void setOrderLines(List<OrderLineFullDto> orderLines) {
+        this.orderLines = orderLines;
+    }
 
     public Integer getId() {
         return id;

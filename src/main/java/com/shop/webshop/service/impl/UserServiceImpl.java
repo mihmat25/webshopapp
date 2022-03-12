@@ -34,6 +34,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserFullDto findByUserName(String userName) {
+        User user = userRepository.findByUserName(userName).orElseThrow(() -> new RuntimeException("User with username: " + userName + " not found!"));
+        return UserMapper.userToFullDto(user);
+    }
+
+    @Override
+    public UserFullDto findByEmail(String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User with email: " + email + " not found"));
+        return UserMapper.userToFullDto(user);
+    }
+
+    @Override
     public List<UserFullDto> findAll() {
         List<UserFullDto> userList = new ArrayList<>();
         userRepository.findAll().forEach(entity -> {

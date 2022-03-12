@@ -25,6 +25,7 @@ public class Order {
     @Column(name = "date_of_submission")
     private Date dateOfSubmission;
 
+    // Hibernate nu face load decat la acces
     @OneToMany(mappedBy = "order")
     private List<OrderLine> orderLines = new ArrayList<>();
 

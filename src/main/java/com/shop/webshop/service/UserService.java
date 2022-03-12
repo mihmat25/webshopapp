@@ -10,6 +10,10 @@ public interface UserService {
 
     UserFullDto findById(Integer id);
 
+    UserFullDto findByUserName(String userName);
+
+    UserFullDto findByEmail(String email);
+
     List<UserFullDto> findAll();
 
     UserFullDto update(UserCreateDto userCreateDto);

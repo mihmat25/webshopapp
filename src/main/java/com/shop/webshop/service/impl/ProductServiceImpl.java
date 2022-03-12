@@ -4,6 +4,7 @@ import com.shop.webshop.dto.productdto.ProductCreateDto;
 import com.shop.webshop.dto.productdto.ProductFullDto;
 import com.shop.webshop.mapper.ProductMapper;
 import com.shop.webshop.model.Product;
+import com.shop.webshop.repository.CategoryRepository;
 import com.shop.webshop.repository.ProductRepository;
 import com.shop.webshop.service.ProductService;
 import org.springframework.stereotype.Service;
@@ -15,9 +16,11 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
 
-    public ProductServiceImpl(ProductRepository productRepository) {
+    public ProductServiceImpl(ProductRepository productRepository, CategoryRepository categoryRepository) {
         this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     @Override
@@ -53,5 +56,19 @@ public class ProductServiceImpl implements ProductService {
     public void delete(Integer id) {
         Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product with id: " + id + " not found!"));
         productRepository.delete(product);
+    }
+
+    @Override
+    public Product addProductToCategory(Integer productId, Integer categoryId) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new RuntimeException(("The ID does not exist")));
+
+
+        product.setCategory(categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new RuntimeException("The ID does not exist")));
+
+        productRepository.save(product);
+
+        return product;
     }
 }

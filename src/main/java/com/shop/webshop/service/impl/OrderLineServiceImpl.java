@@ -5,6 +5,7 @@ import com.shop.webshop.dto.orderlinedto.OrderLineFullDto;
 import com.shop.webshop.mapper.OrderLineMapper;
 import com.shop.webshop.model.OrderLine;
 import com.shop.webshop.repository.OrderLineRepository;
+import com.shop.webshop.repository.ProductRepository;
 import com.shop.webshop.service.OrderLineService;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,11 @@ public class OrderLineServiceImpl implements OrderLineService {
 
     private final OrderLineRepository orderLineRepository;
 
-    public OrderLineServiceImpl(OrderLineRepository orderLineRepository) {
+    private final ProductRepository productRepository;
+
+    public OrderLineServiceImpl(OrderLineRepository orderLineRepository, ProductRepository productRepository) {
         this.orderLineRepository = orderLineRepository;
+        this.productRepository = productRepository;
     }
 
     @Override
@@ -54,4 +58,5 @@ public class OrderLineServiceImpl implements OrderLineService {
         OrderLine orderLine = orderLineRepository.findById(id).orElseThrow(() -> new RuntimeException("OrderLine with id: " + id + " not found!"));
         orderLineRepository.delete(orderLine);
     }
+
 }
