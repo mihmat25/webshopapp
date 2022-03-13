@@ -8,6 +8,8 @@ import com.shop.webshop.service.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/webshopapp/product")
 public class ProductController {
@@ -32,5 +34,11 @@ public class ProductController {
         ProductFullDto productFullDto = ProductMapper.productToFullDto(product);
 
         return ResponseEntity.ok(productFullDto);
+    }
+
+    @GetMapping("/findAll")
+    public ResponseEntity<List<ProductFullDto>> findAll() {
+        List<ProductFullDto> listOfProduct = productService.findAll();
+        return ResponseEntity.ok(listOfProduct);
     }
 }
