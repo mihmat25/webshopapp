@@ -26,31 +26,35 @@ public class UserValidator implements Validator {
     public void validate(Object o, Errors errors) {
         User user = (User) o;
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "error.not_empty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "error.not_empty");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "error.not_empty");
 
-
-        if (user.getUserName().length() < 4) {
-            errors.rejectValue("username", "register.error.username.less_4");
-        }
-        if(user.getUserName().length() > 32){
-            errors.rejectValue("username","register.error.username.over_32");
+        if (userService.verifyUserName(user.getUserName()) != null) {
+            errors.rejectValue("userName", "register.error.duplicated.username");
         }
 
-        if (userService.findByUserName(user.getUserName()) != null) {
-            errors.rejectValue("username", "register.error.duplicated.username");
+       /* if (user.getUserName().length() < 4) {
+            errors.rejectValue("userName", "register.error.username.less_4");
+        }
+        if (user.getUserName().length() > 32) {
+            errors.rejectValue("userName", "register.error.username.over_32");
         }
 
-        if (userService.findByEmail(user.getEmail()) != null){
+
+        if (userService.findByEmail(user.getEmail()) != null) {
             errors.rejectValue("email", "register.error.duplicated.email");
         }
 
         if (user.getPassword().length() < 8) {
             errors.rejectValue("password", "register.error.password.less_8");
         }
-        if (user.getPassword().length() > 32){
+        if (user.getPassword().length() > 32) {
             errors.rejectValue("password", "register.error.password.over_32");
         }
+
+        if (!user.getPasswordConfirm().equals(user.getPassword())) {
+            errors.rejectValue("passwordConfirm", "register.error.diff_password");
+        }*/
 
     }
 }
