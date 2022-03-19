@@ -27,6 +27,7 @@ public class ProductController {
         return ResponseEntity.ok(productFullDto);
     }
 
+    // /addCategory?productId=7&categoryId=89
     @PutMapping("/addCategory")
     public ResponseEntity<ProductFullDto> addProductToCategory(@RequestParam Integer productId,
                                                                @RequestParam Integer categoryId) {

@@ -21,8 +21,8 @@ public class OrderMapper {
         order.setDateOfSubmission(orderCreateDto.getDateOfSubmission());
         order.setStatus(orderCreateDto.getStatus());
 
-
         return order;
+
     }
 
     public static OrderFullDto orderToFullDto(Order order) {
@@ -30,7 +30,7 @@ public class OrderMapper {
         List<OrderLineFullDto> orderLineFullDtoList = new ArrayList<>();
 
         OrderFullDto orderFullDto = new OrderFullDto();
-        orderFullDto.setUser(order.getUser());
+        orderFullDto.setUserId(order.getUser().getId());
         orderFullDto.setUserAddress(order.getUserAddress());
         orderFullDto.setTotalCost(order.getTotalCost());
         orderFullDto.setDateOfSubmission(order.getDateOfSubmission());
@@ -49,4 +49,6 @@ public class OrderMapper {
         return orderFullDto;
 
     }
+
+
 }

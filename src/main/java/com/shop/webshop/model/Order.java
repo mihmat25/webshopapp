@@ -26,7 +26,8 @@ public class Order {
     private Date dateOfSubmission;
 
     // Hibernate nu face load decat la acces
-    @OneToMany(mappedBy = "order")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_id")
     private List<OrderLine> orderLines = new ArrayList<>();
 
     @Column(name = "status")

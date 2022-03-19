@@ -10,21 +10,13 @@ import java.util.List;
 
 public class OrderFullDto {
     private Integer id;
-    private User user;
+    private Integer userId;
     private String userAddress;
     private Double totalCost;
     private Date dateOfSubmission;
     private Status status;
     // TODO add orderlist
     private List<OrderLineFullDto> orderLines;
-
-    public List<OrderLineFullDto> getOrderLines() {
-        return orderLines;
-    }
-
-    public void setOrderLines(List<OrderLineFullDto> orderLines) {
-        this.orderLines = orderLines;
-    }
 
     public Integer getId() {
         return id;
@@ -34,12 +26,12 @@ public class OrderFullDto {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getUserAddress() {
@@ -72,5 +64,13 @@ public class OrderFullDto {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public List<OrderLineFullDto> getOrderLines() {
+        return orderLines;
+    }
+
+    public void setOrderLines(List<OrderLineFullDto> orderLines) {
+        this.orderLines = orderLines;
     }
 }

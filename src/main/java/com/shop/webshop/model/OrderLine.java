@@ -63,4 +63,5 @@ public class OrderLine {
     public void setProductPrice(Double productPrice) {
         this.productPrice = productPrice;
     }
+
 }

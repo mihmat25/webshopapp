@@ -6,8 +6,6 @@ import com.shop.webshop.service.UserService;
 import com.shop.webshop.validator.UserValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +39,7 @@ public class RegisterController {
         }
 
         userService.save(userForm);
-       // userService.login(userForm.getUserName(), userForm.getPasswordConfirm());
+        //userService.login(userForm.getUserName(), userForm.getPasswordConfirm());
 
         return "redirect:/home";
     }

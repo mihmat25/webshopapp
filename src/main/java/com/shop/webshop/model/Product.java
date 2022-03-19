@@ -20,7 +20,7 @@ public class Product {
     private String description;
 
     @Column(name = "thumbnail")
-    private URL thumbnail;
+    private String thumbnail;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
@@ -34,10 +34,6 @@ public class Product {
 
     @Column(name = "stock")
     private Integer stock;
-
-    @OneToMany(mappedBy = "product")
-    private List<OrderLine> orderLines = new ArrayList<>();
-
 
     public Integer getId() {
         return id;
@@ -63,11 +59,11 @@ public class Product {
         this.description = description;
     }
 
-    public URL getThumbnail() {
+    public String getThumbnail() {
         return thumbnail;
     }
 
-    public void setThumbnail(URL thumbnail) {
+    public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
     }
 
@@ -103,11 +99,5 @@ public class Product {
         this.stock = stock;
     }
 
-    public List<OrderLine> getOrderLines() {
-        return orderLines;
-    }
 
-    public void setOrderLines(List<OrderLine> orderLines) {
-        this.orderLines = orderLines;
-    }
 }
