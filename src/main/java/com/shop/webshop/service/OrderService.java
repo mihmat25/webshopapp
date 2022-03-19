@@ -14,7 +14,10 @@ public interface OrderService {
 
     List<OrderFullDto> findAll();
 
-    OrderFullDto update(OrderCreateDto orderCreateDto);
+//    OrderFullDto update(OrderFullDto orderFullDto);
+
 
     void delete(Integer id);
+
+    OrderFullDto addToCart(Integer orderId, Integer productId, Integer quantity);
 }

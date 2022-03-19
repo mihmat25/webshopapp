@@ -2,7 +2,6 @@ package com.shop.webshop.mapper;
 
 import com.shop.webshop.dto.orderlinedto.OrderLineCreateDto;
 import com.shop.webshop.dto.orderlinedto.OrderLineFullDto;
-import com.shop.webshop.dto.productdto.ProductResponseDto;
 import com.shop.webshop.model.OrderLine;
 
 public class OrderLineMapper {

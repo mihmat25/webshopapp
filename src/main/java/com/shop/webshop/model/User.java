@@ -21,6 +21,9 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @Transient
+    private String passwordConfirm;
+
     @Column(name = "address")
     private String address;
 
@@ -66,12 +69,24 @@ public class User {
         this.password = password;
     }
 
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
     public String getAddress() {
         return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Order getCurrentOrder() {
+        return currentOrder;
+    }
+
+    public void setCurrentOrder(Order currentOrder) {
+        this.currentOrder = currentOrder;
     }
 
     public Role getRole() {
@@ -90,12 +105,8 @@ public class User {
         this.orders = orders;
     }
 
-    public Order getCurrentOrder() {
-        return currentOrder;
-    }
-
-    public void setCurrentOrder(Order currentOrder) {
-        this.currentOrder = currentOrder;
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
     }
 
     @Override

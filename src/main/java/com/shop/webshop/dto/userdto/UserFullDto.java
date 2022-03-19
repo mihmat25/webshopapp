@@ -1,7 +1,5 @@
 package com.shop.webshop.dto.userdto;
 
-import com.shop.webshop.model.Role;
-
 public class UserFullDto {
     private Integer id;
     private String userName;
