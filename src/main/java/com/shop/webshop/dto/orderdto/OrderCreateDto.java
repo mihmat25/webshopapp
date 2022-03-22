@@ -6,7 +6,7 @@ import com.shop.webshop.model.User;
 import java.util.Date;
 
 public class OrderCreateDto {
-    // TODO umake user id
+    // TODO make user id
     private User user;
     private String userAddress;
     private Double totalCost;

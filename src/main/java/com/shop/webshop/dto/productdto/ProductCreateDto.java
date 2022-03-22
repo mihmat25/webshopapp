@@ -9,7 +9,7 @@ public class ProductCreateDto {
 
     private String name;
     private String description;
-    private URL thumbnail;
+    private String thumbnail;
     private Category category;
     private Double price;
     private ProductType productType;
@@ -31,11 +31,11 @@ public class ProductCreateDto {
         this.description = description;
     }
 
-    public URL getThumbnail() {
+    public String getThumbnail() {
         return thumbnail;
     }
 
-    public void setThumbnail(URL thumbnail) {
+    public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
     }
 

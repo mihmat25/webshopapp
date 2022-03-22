@@ -30,7 +30,9 @@ public class Order {
     @JoinColumn(name = "order_id")
     private List<OrderLine> orderLines = new ArrayList<>();
 
-    @Column(name = "status")
+    @Column(name = "status", columnDefinition = "ENUM('ACTIVE', 'CLOSED')")
+    @Enumerated(EnumType.STRING)
+
     private Status status;
 
     public Integer getId() {

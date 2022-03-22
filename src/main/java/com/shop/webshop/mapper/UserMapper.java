@@ -8,19 +8,24 @@ public class UserMapper {
     public static User userToEntity(UserCreateDto userCreateDto) {
         User user = new User();
         user.setUserName(userCreateDto.getUserName());
-        user.setEmail(userCreateDto.getEmail());
         user.setPassword(userCreateDto.getPassword());
-        user.setAddress(userCreateDto.getAddress());
-
         return user;
     }
 
-    public static UserFullDto userToFullDto(User user) {
-        UserFullDto userFullDto = new UserFullDto();
-        userFullDto.setUserName(user.getUserName());
-        userFullDto.setEmail(user.getEmail());
-        userFullDto.setAddress(user.getAddress());
+    public static User userToUpdateEntity(UserFullDto userFullDto) {
+        User user = new User();
+        user.setEmail(userFullDto.getEmail());
+        user.setAddress(userFullDto.getAddress());
+        return user;
+    }
 
-        return userFullDto;
+
+    public static UserFullDto userToFullDto(User user) {
+        return new UserFullDto(
+                user.getId(),
+                user.getUserName(),
+                user.getEmail(),
+                user.getAddress()
+        );
     }
 }

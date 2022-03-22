@@ -23,7 +23,6 @@ public class ProductController {
     @PostMapping("/createProduct")
     public ResponseEntity<ProductFullDto> createProduct(@RequestBody ProductCreateDto productCreateDto) {
         ProductFullDto productFullDto = productService.create(productCreateDto);
-
         return ResponseEntity.ok(productFullDto);
     }
 

@@ -33,7 +33,6 @@ public class CategoryServiceImpl implements CategoryService {
         return CategoryMapper.categoryToFullDto(category);
     }
 
-
     @Override
     public List<CategoryFullDto> findAll() {
         List<CategoryFullDto> categoryList = new ArrayList<>();

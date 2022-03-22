@@ -9,7 +9,7 @@ public class ProductFullDto {
     private Integer id;
     private String name;
     private String description;
-    private URL thumbnail;
+    private String thumbnail;
     private Integer categoryId;
     private Double price;
     private ProductType productType;
@@ -40,11 +40,11 @@ public class ProductFullDto {
         this.description = description;
     }
 
-    public URL getThumbnail() {
+    public String getThumbnail() {
         return thumbnail;
     }
 
-    public void setThumbnail(URL thumbnail) {
+    public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
     }
 

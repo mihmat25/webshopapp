@@ -62,13 +62,9 @@ public class ProductServiceImpl implements ProductService {
     public Product addProductToCategory(Integer productId, Integer categoryId) {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException(("The ID does not exist")));
-
-
         product.setCategory(categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new RuntimeException("The ID does not exist")));
-
         productRepository.save(product);
-
         return product;
     }
 }
