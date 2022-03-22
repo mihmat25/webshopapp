@@ -21,13 +21,10 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Transient
-    private String passwordConfirm;
-
     @Column(name = "address")
     private String address;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private Order currentOrder;
 
     @Column(name = "role")
@@ -36,6 +33,15 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Order> orders = new ArrayList<>();
 
+
+    public User() {
+
+    }
+
+    public User(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
+    }
 
     public Integer getId() {
         return id;
@@ -69,10 +75,6 @@ public class User {
         this.password = password;
     }
 
-    public String getPasswordConfirm() {
-        return passwordConfirm;
-    }
-
     public String getAddress() {
         return address;
     }
@@ -103,10 +105,6 @@ public class User {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
-    }
-
-    public void setPasswordConfirm(String passwordConfirm) {
-        this.passwordConfirm = passwordConfirm;
     }
 
     @Override

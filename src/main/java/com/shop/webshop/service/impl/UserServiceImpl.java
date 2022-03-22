@@ -2,18 +2,14 @@ package com.shop.webshop.service.impl;
 
 import com.shop.webshop.dto.userdto.UserCreateDto;
 import com.shop.webshop.dto.userdto.UserFullDto;
+import com.shop.webshop.exceptions.UserNameAlreadyUsedException;
 import com.shop.webshop.mapper.UserMapper;
+import com.shop.webshop.model.Order;
+import com.shop.webshop.model.Status;
 import com.shop.webshop.model.User;
+import com.shop.webshop.repository.OrderRepository;
 import com.shop.webshop.repository.UserRepository;
 import com.shop.webshop.service.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,18 +18,12 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
     private final UserRepository userRepository;
-    private final UserDetailsService userDetailsService;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final AuthenticationManager authenticationManager;
+    private final OrderRepository orderRepository;
 
-
-    public UserServiceImpl(UserRepository userRepository, UserDetailsService userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder, AuthenticationManager authenticationManager) {
+    public UserServiceImpl(UserRepository userRepository, OrderRepository orderRepository) {
         this.userRepository = userRepository;
-        this.userDetailsService = userDetailsService;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-        this.authenticationManager = authenticationManager;
+        this.orderRepository = orderRepository;
     }
 
 
@@ -63,10 +53,6 @@ public class UserServiceImpl implements UserService {
         return UserMapper.userToFullDto(user);
     }
 
-    @Override
-    public User verifyUserName(String userName) {
-        return userRepository.findByUserName(userName);
-    }
 
     @Override
     public List<UserFullDto> findAll() {
@@ -77,9 +63,10 @@ public class UserServiceImpl implements UserService {
         return userList;
     }
 
+    //TODO implement update method
     @Override
-    public UserFullDto update(UserCreateDto userCreateDto) {
-        User user = UserMapper.userToEntity(userCreateDto);
+    public UserFullDto update(UserFullDto userFullDto) {
+        User user = UserMapper.userToUpdateEntity(userFullDto);
         User updatedUser = userRepository.save(user);
         return UserMapper.userToFullDto(updatedUser);
     }
@@ -91,22 +78,30 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void save(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+    public UserFullDto signUp(UserCreateDto userCreateDto) {
+        if (userRepository.existsByUserName(userCreateDto.getUserName())) {
+            throw new UserNameAlreadyUsedException(userCreateDto.getUserName());
+        }
+
+        User user = userRepository.save(UserMapper.userToEntity(userCreateDto));
+
+        Order order = new Order();
+        order.setStatus(Status.ACTIVE);
+        order.setUser(user);
+        user.setCurrentOrder(order);
         userRepository.save(user);
+
+        return UserMapper.userToFullDto(user);
     }
 
     @Override
-    public void login(String userName, String password) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
-        authenticationManager.authenticate(token);
-
-        if (token.isAuthenticated()) {
-            SecurityContextHolder.getContext().setAuthentication(token);
-            logger.debug(String.format("User %s logged in successfully!", userName));
-        } else {
-            logger.error(String.format("Error with %s authentication!", userName));
+    public UserFullDto login(UserCreateDto userCreateDto) {
+        User user = userRepository.findByUserName(userCreateDto.getUserName());
+        if (user != null && user.getPassword().equals(userCreateDto.getPassword())) {
+            return UserMapper.userToFullDto(user);
         }
+        return null;
     }
+
+
 }

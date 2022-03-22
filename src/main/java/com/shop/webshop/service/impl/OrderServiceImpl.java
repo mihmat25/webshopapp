@@ -2,14 +2,11 @@ package com.shop.webshop.service.impl;
 
 import com.shop.webshop.dto.orderdto.OrderCreateDto;
 import com.shop.webshop.dto.orderdto.OrderFullDto;
-import com.shop.webshop.dto.orderlinedto.OrderLineFullDto;
-import com.shop.webshop.dto.productdto.ProductFullDto;
 import com.shop.webshop.mapper.OrderMapper;
-import com.shop.webshop.model.Order;
-import com.shop.webshop.model.OrderLine;
-import com.shop.webshop.model.Product;
+import com.shop.webshop.model.*;
 import com.shop.webshop.repository.OrderRepository;
 import com.shop.webshop.repository.ProductRepository;
+import com.shop.webshop.repository.UserRepository;
 import com.shop.webshop.service.OrderService;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +17,13 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
+    private final UserRepository userRepository;
 
-    public OrderServiceImpl(OrderRepository orderRepository, ProductRepository productRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, ProductRepository productRepository, UserRepository userRepository) {
         this.orderRepository = orderRepository;
         this.productRepository = productRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -48,26 +47,6 @@ public class OrderServiceImpl implements OrderService {
             orderList.add(OrderMapper.orderToFullDto(entity));
         });
         return orderList;
-    }
-
-//    @Override
-//    public OrderFullDto update(OrderFullDto orderFullDto) {
-//        Order order = OrderMapper.orderToEntity(orderFullDto);
-//        Order updatedOrder = orderRepository.save(order);
-//        return OrderMapper.orderToFullDto(updatedOrder);
-//    }
-
-//    @Override
-//    public OrderFullDto update(OrderFullDto orderFullDto) {
-//        Order order = OrderMapper.orderToEntity(orderFullDto);
-//        Order updatedOrder = orderRepository.save(order);
-//        return OrderMapper.orderToFullDto(updatedOrder);
-//    }
-
-    @Override
-    public void delete(Integer id) {
-        Order order = orderRepository.findById(id).orElseThrow(() -> new RuntimeException("Order with id: " + id + " not found!"));
-        orderRepository.delete(order);
     }
 
     @Override
@@ -94,7 +73,26 @@ public class OrderServiceImpl implements OrderService {
         newOrderLines.add(orderLine);
         order.setOrderLines(newOrderLines);
 
+        double totalCost = 0.0;
+        for (OrderLine orderLine1 : order.getOrderLines()) {
+            double cost = orderLine1.getProductPrice() * orderLine1.getNumberOfProducts();
+            totalCost += cost;
+        }
+        order.setTotalCost(totalCost);
+
         Order savedOrder = orderRepository.save(order);
         return OrderMapper.orderToFullDto(savedOrder);
+    }
+
+    public OrderFullDto checkOut(Integer orderId) {
+        Order order = orderRepository.findById(orderId).orElseThrow(() -> new RuntimeException("order not found"));
+        order.setStatus(Status.CLOSED);
+        Order newOrder = new Order();
+        newOrder.setStatus(Status.ACTIVE);
+        User user = userRepository.findByCurrentOrder(order);
+        user.setCurrentOrder(newOrder);
+        newOrder.setUser(user);
+        userRepository.save(user);
+        return OrderMapper.orderToFullDto(order);
     }
 }

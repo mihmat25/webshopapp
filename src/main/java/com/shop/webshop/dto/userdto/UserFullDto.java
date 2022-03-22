@@ -6,6 +6,13 @@ public class UserFullDto {
     private String email;
     private String address;
 
+    public UserFullDto(Integer id, String userName, String email, String address) {
+        this.id = id;
+        this.userName = userName;
+        this.email = email;
+        this.address = address;
+    }
+
     public Integer getId() {
         return id;
     }

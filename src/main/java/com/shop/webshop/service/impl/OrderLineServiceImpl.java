@@ -53,10 +53,4 @@ public class OrderLineServiceImpl implements OrderLineService {
         return OrderLineMapper.orderLineToFullDto(updatedOrderLine);
     }
 
-    @Override
-    public void delete(Integer id) {
-        OrderLine orderLine = orderLineRepository.findById(id).orElseThrow(() -> new RuntimeException("OrderLine with id: " + id + " not found!"));
-        orderLineRepository.delete(orderLine);
-    }
-
 }

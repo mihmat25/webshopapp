@@ -15,6 +15,4 @@ public interface OrderLineService {
 
     OrderLineFullDto update(OrderLineCreateDto orderLineCreateDto);
 
-    void delete(Integer id);
-
 }

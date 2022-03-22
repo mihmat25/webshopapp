@@ -1,12 +1,13 @@
 package com.shop.webshop.controller;
 
+import com.shop.webshop.dto.userdto.UserCreateDto;
 import com.shop.webshop.dto.userdto.UserFullDto;
 import com.shop.webshop.model.User;
 import com.shop.webshop.service.UserService;
+import org.apache.coyote.Response;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,6 +26,29 @@ public class UserController {
         List<UserFullDto> listOfUsers = userService.findAll();
         return ResponseEntity.ok(listOfUsers);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserFullDto> getOne(@PathVariable Integer id) {
+        return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);
+    }
+
+    @PostMapping("/signup")
+    public ResponseEntity<UserFullDto> create(@RequestBody UserCreateDto userCreateDto) {
+        return new ResponseEntity<>(userService.signUp(userCreateDto), HttpStatus.OK);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<UserFullDto> login(@RequestBody UserCreateDto userCreateDto) {
+        return new ResponseEntity<>(userService.login(userCreateDto), HttpStatus.OK);
+    }
+
+    //TODO implement update endpoint
+    @PostMapping("/{userId}")
+    public ResponseEntity<UserFullDto> update(@PathVariable(name = "userId") Integer userId, @RequestBody UserFullDto userFullDto) {
+        // TODO discuss how to implement
+        return new ResponseEntity<>(userService.update(userFullDto), HttpStatus.OK);
+    }
+
 
     // TODO @Post  pe /users cu usename si parola intr-un obiect de tipul
     // return a user object also with id
