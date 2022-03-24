@@ -19,7 +19,7 @@ public class OrderLineMapper {
 
     public static OrderLineFullDto orderLineToFullDto(OrderLine orderLine) {
         OrderLineFullDto orderLineFullDto = new OrderLineFullDto();
-        // set the id
+        orderLineFullDto.setId(orderLine.getId());
         orderLineFullDto.setOrderId(orderLine.getOrder().getId());
         orderLineFullDto.setProductId(orderLine.getProduct().getId());
         orderLineFullDto.setProductPrice(orderLine.getProductPrice());

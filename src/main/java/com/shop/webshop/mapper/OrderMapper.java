@@ -30,6 +30,7 @@ public class OrderMapper {
         List<OrderLineFullDto> orderLineFullDtoList = new ArrayList<>();
 
         OrderFullDto orderFullDto = new OrderFullDto();
+        orderFullDto.setId(order.getId());
         orderFullDto.setUserId(order.getUser().getId());
         orderFullDto.setUserAddress(order.getUserAddress());
         orderFullDto.setTotalCost(order.getTotalCost());

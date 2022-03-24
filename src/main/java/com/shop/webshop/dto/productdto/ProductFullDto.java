@@ -1,10 +1,5 @@
 package com.shop.webshop.dto.productdto;
 
-import com.shop.webshop.model.Category;
-import com.shop.webshop.model.ProductType;
-
-import java.net.URL;
-
 public class ProductFullDto {
     private Integer id;
     private String name;
@@ -12,7 +7,6 @@ public class ProductFullDto {
     private String thumbnail;
     private Integer categoryId;
     private Double price;
-    private ProductType productType;
     private Integer stock;
 
 
@@ -62,14 +56,6 @@ public class ProductFullDto {
 
     public void setPrice(Double price) {
         this.price = price;
-    }
-
-    public ProductType getProductType() {
-        return productType;
-    }
-
-    public void setProductType(ProductType productType) {
-        this.productType = productType;
     }
 
     public Integer getStock() {

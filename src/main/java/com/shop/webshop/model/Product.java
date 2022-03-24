@@ -29,9 +29,6 @@ public class Product {
     @Column(name = "price")
     private Double price;
 
-    @Column(name = "product_type")
-    private ProductType productType;
-
     @Column(name = "stock")
     private Integer stock;
 
@@ -81,14 +78,6 @@ public class Product {
 
     public void setPrice(Double price) {
         this.price = price;
-    }
-
-    public ProductType getProductType() {
-        return productType;
-    }
-
-    public void setProductType(ProductType productType) {
-        this.productType = productType;
     }
 
     public Integer getStock() {
