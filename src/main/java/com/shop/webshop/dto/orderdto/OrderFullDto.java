@@ -5,6 +5,8 @@ import com.shop.webshop.model.Order;
 import com.shop.webshop.model.Status;
 import com.shop.webshop.model.User;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +15,7 @@ public class OrderFullDto {
     private Integer userId;
     private String userAddress;
     private Double totalCost;
-    private Date dateOfSubmission;
+    private LocalDateTime dateOfSubmission;
     private Status status;
     // TODO add orderlist
     private List<OrderLineFullDto> orderLines;
@@ -50,11 +52,11 @@ public class OrderFullDto {
         this.totalCost = totalCost;
     }
 
-    public Date getDateOfSubmission() {
+    public LocalDateTime getDateOfSubmission() {
         return dateOfSubmission;
     }
 
-    public void setDateOfSubmission(Date dateOfSubmission) {
+    public void setDateOfSubmission(LocalDateTime dateOfSubmission) {
         this.dateOfSubmission = dateOfSubmission;
     }
 

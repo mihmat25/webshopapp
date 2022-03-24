@@ -1,6 +1,8 @@
 package com.shop.webshop.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,7 +25,7 @@ public class Order {
     private Double totalCost;
 
     @Column(name = "date_of_submission")
-    private Date dateOfSubmission;
+    private LocalDateTime dateOfSubmission;
 
     // Hibernate nu face load decat la acces
     @OneToMany(cascade = CascadeType.ALL)
@@ -67,11 +69,11 @@ public class Order {
         this.totalCost = totalCost;
     }
 
-    public Date getDateOfSubmission() {
+    public LocalDateTime getDateOfSubmission() {
         return dateOfSubmission;
     }
 
-    public void setDateOfSubmission(Date dateOfSubmission) {
+    public void setDateOfSubmission(LocalDateTime dateOfSubmission) {
         this.dateOfSubmission = dateOfSubmission;
     }
 

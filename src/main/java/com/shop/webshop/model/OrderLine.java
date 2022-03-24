@@ -5,7 +5,6 @@ import javax.persistence.*;
 @Entity
 public class OrderLine {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

@@ -2,14 +2,17 @@ package com.shop.webshop.service.impl;
 
 import com.shop.webshop.dto.orderdto.OrderCreateDto;
 import com.shop.webshop.dto.orderdto.OrderFullDto;
+import com.shop.webshop.exceptions.OutOfStockException;
 import com.shop.webshop.mapper.OrderMapper;
 import com.shop.webshop.model.*;
+import com.shop.webshop.repository.OrderLineRepository;
 import com.shop.webshop.repository.OrderRepository;
 import com.shop.webshop.repository.ProductRepository;
 import com.shop.webshop.repository.UserRepository;
 import com.shop.webshop.service.OrderService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,11 +22,13 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
+    private final OrderLineRepository orderLineRepository;
 
-    public OrderServiceImpl(OrderRepository orderRepository, ProductRepository productRepository, UserRepository userRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, ProductRepository productRepository, UserRepository userRepository, OrderLineRepository orderLineRepository) {
         this.orderRepository = orderRepository;
         this.productRepository = productRepository;
         this.userRepository = userRepository;
+        this.orderLineRepository = orderLineRepository;
     }
 
     @Override
@@ -86,6 +91,19 @@ public class OrderServiceImpl implements OrderService {
 
     public OrderFullDto checkOut(Integer orderId) {
         Order order = orderRepository.findById(orderId).orElseThrow(() -> new RuntimeException("order not found"));
+        order.setDateOfSubmission(LocalDateTime.now());
+        for (OrderLine orderLine1 : order.getOrderLines()) {
+            int currentStock = orderLine1.getProduct().getStock();
+            int newStock = currentStock - orderLine1.getNumberOfProducts();
+            if (newStock >= 0) {
+                orderLine1.getProduct().setStock(newStock);
+                productRepository.save(orderLine1.getProduct());
+            } else {
+                orderLine1.setNumberOfProducts(0);
+                orderLineRepository.save(orderLine1);
+                throw new OutOfStockException();
+            }
+        }
         order.setStatus(Status.CLOSED);
         Order newOrder = new Order();
         newOrder.setStatus(Status.ACTIVE);
