@@ -8,7 +8,7 @@ public class UserMapper {
     public static User userToEntity(UserCreateDto userCreateDto) {
         User user = new User();
         user.setUserName(userCreateDto.getUserName());
-        user.setPassword(userCreateDto.getPassword());
+        user.setUserPassword(userCreateDto.getPassword());
         return user;
     }
 

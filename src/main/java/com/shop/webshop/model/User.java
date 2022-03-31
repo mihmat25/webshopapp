@@ -19,7 +19,7 @@ public class User {
     private String email;
 
     @Column(name = "password")
-    private String password;
+    private String userPassword;
 
     @Column(name = "address")
     private String address;
@@ -27,7 +27,8 @@ public class User {
     @OneToOne(cascade = {CascadeType.ALL})
     private Order currentOrder;
 
-    @Column(name = "role")
+    @Column(name = "role", columnDefinition = "ENUM('ADMIN', 'USER')")
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     @OneToMany(mappedBy = "user")
@@ -38,9 +39,9 @@ public class User {
 
     }
 
-    public User(String userName, String password) {
+    public User(String userName, String userPassword) {
         this.userName = userName;
-        this.password = password;
+        this.userPassword = userPassword;
     }
 
     public Integer getId() {
@@ -67,12 +68,12 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getUserPassword() {
+        return userPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUserPassword(String password) {
+        this.userPassword = password;
     }
 
     public String getAddress() {
@@ -112,12 +113,12 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return userName.equals(user.userName) && password.equals(user.password);
+        return userName.equals(user.userName) && userPassword.equals(user.userPassword);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userName, password);
+        return Objects.hash(userName, userPassword);
     }
 
 }

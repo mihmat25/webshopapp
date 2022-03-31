@@ -6,7 +6,6 @@ import com.shop.webshop.model.Product;
 
 public class ProductMapper {
     public static Product productToEntity(ProductCreateDto productCreateDto) {
-
         Product product = new Product();
         product.setName(productCreateDto.getName());
         product.setDescription(productCreateDto.getDescription());

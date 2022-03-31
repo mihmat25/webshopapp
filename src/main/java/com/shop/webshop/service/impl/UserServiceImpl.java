@@ -3,8 +3,10 @@ package com.shop.webshop.service.impl;
 import com.shop.webshop.dto.userdto.UserCreateDto;
 import com.shop.webshop.dto.userdto.UserFullDto;
 import com.shop.webshop.exceptions.UserNameAlreadyUsedException;
+import com.shop.webshop.exceptions.UsernameDoesNotExistException;
 import com.shop.webshop.mapper.UserMapper;
 import com.shop.webshop.model.Order;
+import com.shop.webshop.model.Role;
 import com.shop.webshop.model.Status;
 import com.shop.webshop.model.User;
 import com.shop.webshop.repository.OrderRepository;
@@ -84,7 +86,7 @@ public class UserServiceImpl implements UserService {
         }
 
         User user = userRepository.save(UserMapper.userToEntity(userCreateDto));
-
+        user.setRole(Role.USER);
         Order order = new Order();
         order.setStatus(Status.ACTIVE);
         order.setUser(user);
@@ -97,10 +99,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserFullDto login(UserCreateDto userCreateDto) {
         User user = userRepository.findByUserName(userCreateDto.getUserName());
-        if (user != null && user.getPassword().equals(userCreateDto.getPassword())) {
+        if (user != null && user.getUserPassword().equals(userCreateDto.getPassword())) {
             return UserMapper.userToFullDto(user);
         }
-        return null;
+        else {
+            throw new UsernameDoesNotExistException(userCreateDto.getUserName());
+        }
     }
 
 
