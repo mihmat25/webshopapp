@@ -2,7 +2,6 @@ package com.shop.webshop.service;
 
 import com.shop.webshop.dto.orderdto.OrderCreateDto;
 import com.shop.webshop.dto.orderdto.OrderFullDto;
-import com.shop.webshop.model.Order;
 
 import java.util.List;
 

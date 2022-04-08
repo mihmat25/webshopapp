@@ -2,7 +2,6 @@ package com.shop.webshop.service;
 
 import com.shop.webshop.dto.userdto.UserCreateDto;
 import com.shop.webshop.dto.userdto.UserFullDto;
-import com.shop.webshop.model.User;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ public interface UserService {
 
     List<UserFullDto> findAll();
 
-    UserFullDto update(UserFullDto userFullDto);
+    UserFullDto update(UserFullDto userFullDto, Integer userId);
 
     void delete(Integer id);
 

@@ -48,13 +48,11 @@ public class UserServiceImpl implements UserService {
         return UserMapper.userToFullDto(user);
     }
 
-
     @Override
     public UserFullDto findByEmail(String email) {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User with email: " + email + " not found"));
         return UserMapper.userToFullDto(user);
     }
-
 
     @Override
     public List<UserFullDto> findAll() {
@@ -65,10 +63,11 @@ public class UserServiceImpl implements UserService {
         return userList;
     }
 
-    //TODO implement update method
     @Override
-    public UserFullDto update(UserFullDto userFullDto) {
-        User user = UserMapper.userToUpdateEntity(userFullDto);
+    public UserFullDto update(UserFullDto userFullDto, Integer userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User with id: " + userId + " not found!"));
+        user.setEmail(userFullDto.getEmail());
+        user.setAddress(userFullDto.getAddress());
         User updatedUser = userRepository.save(user);
         return UserMapper.userToFullDto(updatedUser);
     }
@@ -101,11 +100,8 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByUserName(userCreateDto.getUserName());
         if (user != null && user.getUserPassword().equals(userCreateDto.getPassword())) {
             return UserMapper.userToFullDto(user);
-        }
-        else {
+        } else {
             throw new UsernameDoesNotExistException(userCreateDto.getUserName());
         }
     }
-
-
 }

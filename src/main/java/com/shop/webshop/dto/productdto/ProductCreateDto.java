@@ -1,13 +1,10 @@
 package com.shop.webshop.dto.productdto;
 
-import com.shop.webshop.model.Category;
-
 public class ProductCreateDto {
 
     private String name;
     private String description;
     private String thumbnail;
-    private Category category;
     private Double price;
     private Integer stock;
 
@@ -33,14 +30,6 @@ public class ProductCreateDto {
 
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 
     public Double getPrice() {

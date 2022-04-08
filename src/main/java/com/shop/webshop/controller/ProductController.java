@@ -21,18 +21,9 @@ public class ProductController {
     }
 
     @PostMapping("/createProduct")
-    public ResponseEntity<ProductFullDto> createProduct(@RequestBody ProductCreateDto productCreateDto) {
-        ProductFullDto productFullDto = productService.create(productCreateDto);
-        return ResponseEntity.ok(productFullDto);
-    }
-
-    // /addCategory?productId=7&categoryId=89
-    @PutMapping("/addCategory")
-    public ResponseEntity<ProductFullDto> addProductToCategory(@RequestParam Integer productId,
-                                                               @RequestParam Integer categoryId) {
-        Product product = productService.addProductToCategory(productId, categoryId);
-        ProductFullDto productFullDto = ProductMapper.productToFullDto(product);
-
+    public ResponseEntity<ProductFullDto> createProduct(@RequestBody ProductCreateDto productCreateDto,
+                                                        @RequestParam Integer categoryId) {
+        ProductFullDto productFullDto = productService.create(productCreateDto, categoryId);
         return ResponseEntity.ok(productFullDto);
     }
 

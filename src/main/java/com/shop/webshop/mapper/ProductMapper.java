@@ -10,7 +10,6 @@ public class ProductMapper {
         product.setName(productCreateDto.getName());
         product.setDescription(productCreateDto.getDescription());
         product.setThumbnail(productCreateDto.getThumbnail());
-        product.setCategory(productCreateDto.getCategory());
         product.setPrice(productCreateDto.getPrice());
         product.setStock(productCreateDto.getStock());
 

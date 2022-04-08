@@ -1,16 +1,20 @@
 package com.shop.webshop.dto.userdto;
 
+import com.shop.webshop.model.Role;
+
 public class UserFullDto {
     private Integer id;
     private String userName;
     private String email;
     private String address;
+    private Role role;
 
-    public UserFullDto(Integer id, String userName, String email, String address) {
+    public UserFullDto(Integer id, String userName, String email, String address, Role role) {
         this.id = id;
         this.userName = userName;
         this.email = email;
         this.address = address;
+        this.role = role;
     }
 
     public Integer getId() {
@@ -44,4 +48,14 @@ public class UserFullDto {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }
+
+

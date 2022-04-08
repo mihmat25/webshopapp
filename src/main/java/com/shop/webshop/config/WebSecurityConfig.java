@@ -27,14 +27,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-               // .antMatchers("/api/webshopapp/category/createCategory").hasRole(Role.ADMIN.name())
-                // .antMatchers("/api/webshopapp").hasRole(Role.USER.name())
+                // .antMatchers("/api/webshopapp/category/createCategory").hasRole(Role.ADMIN.name())
                 .antMatchers("/api/webshopapp/shoppingCart/*").permitAll()
                 .antMatchers("/api/webshopapp/user/*").permitAll()
                 .antMatchers("/api/webshopapp/category/*").permitAll()
-                .antMatchers("/api/webshopapp/user/*").permitAll()
-                .antMatchers("/api/webshopapp/product/*").permitAll()
-
+                .antMatchers("/api/webshopapp/product/createProduct").permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin()
                 .and().httpBasic();

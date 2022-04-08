@@ -3,6 +3,7 @@ package com.shop.webshop.service.impl;
 import com.shop.webshop.dto.productdto.ProductCreateDto;
 import com.shop.webshop.dto.productdto.ProductFullDto;
 import com.shop.webshop.mapper.ProductMapper;
+import com.shop.webshop.model.Category;
 import com.shop.webshop.model.Product;
 import com.shop.webshop.repository.CategoryRepository;
 import com.shop.webshop.repository.ProductRepository;
@@ -24,8 +25,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductFullDto create(ProductCreateDto productCreateDto) {
+    public ProductFullDto create(ProductCreateDto productCreateDto, Integer categoryId) {
+        Category category = categoryRepository.findById(categoryId).orElseThrow(() -> new RuntimeException(".."));
         Product product = ProductMapper.productToEntity(productCreateDto);
+        product.setCategory(category);
         Product savedProduct = productRepository.save(product);
         return ProductMapper.productToFullDto(savedProduct);
     }
@@ -56,15 +59,5 @@ public class ProductServiceImpl implements ProductService {
     public void delete(Integer id) {
         Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product with id: " + id + " not found!"));
         productRepository.delete(product);
-    }
-
-    @Override
-    public Product addProductToCategory(Integer productId, Integer categoryId) {
-        Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new RuntimeException(("The ID does not exist")));
-        product.setCategory(categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new RuntimeException("The ID does not exist")));
-        productRepository.save(product);
-        return product;
     }
 }

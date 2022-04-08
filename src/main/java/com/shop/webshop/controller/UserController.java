@@ -42,14 +42,8 @@ public class UserController {
         return new ResponseEntity<>(userService.login(userCreateDto), HttpStatus.OK);
     }
 
-    //TODO implement update endpoint
-    @PostMapping("/{userId}")
+    @PutMapping("/{userId}")
     public ResponseEntity<UserFullDto> update(@PathVariable(name = "userId") Integer userId, @RequestBody UserFullDto userFullDto) {
-        // TODO discuss how to implement
-        return new ResponseEntity<>(userService.update(userFullDto), HttpStatus.OK);
+        return new ResponseEntity<>(userService.update(userFullDto, userId), HttpStatus.OK);
     }
-
-
-    // TODO @Post  pe /users cu usename si parola intr-un obiect de tipul
-    // return a user object also with id
 }

@@ -56,9 +56,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderFullDto addToCart(Integer orderId, Integer productId, Integer quantity) {
-        // get the order
         Order order = orderRepository.getById(orderId);
-        // daca prod exsita incrementam cantitatea
         for (OrderLine ol : order.getOrderLines()) {
             if (ol.getProduct().getId() == productId) {
                 ol.setNumberOfProducts(ol.getNumberOfProducts() + quantity);
@@ -71,7 +69,6 @@ public class OrderServiceImpl implements OrderService {
         Product p = productRepository.getById(productId);
         orderLine.setProduct(p);
         orderLine.setOrder(order);
-        // update product price on shopping cart checkout
         orderLine.setProductPrice(p.getPrice());
 
         List<OrderLine> newOrderLines = order.getOrderLines();
@@ -84,7 +81,6 @@ public class OrderServiceImpl implements OrderService {
             totalCost += cost;
         }
         order.setTotalCost(totalCost);
-
         Order savedOrder = orderRepository.save(order);
         return OrderMapper.orderToFullDto(savedOrder);
     }
