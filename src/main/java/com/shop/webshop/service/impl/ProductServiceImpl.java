@@ -60,4 +60,13 @@ public class ProductServiceImpl implements ProductService {
         Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product with id: " + id + " not found!"));
         productRepository.delete(product);
     }
+
+    @Override
+    public List<ProductFullDto> findAllProductsByCategoryId(Integer categoryId) {
+        List<ProductFullDto> products = new ArrayList<>();
+        productRepository.findAllByCategory_Id(categoryId).forEach(entity ->{
+            products.add(ProductMapper.productToFullDto(entity));
+        });
+        return products;
+    }
 }

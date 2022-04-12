@@ -15,4 +15,6 @@ public interface ProductService {
     ProductFullDto update(ProductCreateDto productCreateDto);
 
     void delete(Integer id);
+
+    List<ProductFullDto> findAllProductsByCategoryId(Integer categoryId);
 }

@@ -32,4 +32,10 @@ public class ProductController {
         List<ProductFullDto> listOfProduct = productService.findAll();
         return ResponseEntity.ok(listOfProduct);
     }
+
+    @GetMapping("/findAllProductsByCategoryId")
+    public ResponseEntity<List<ProductFullDto>> findAllProductsByCategoryId(@RequestParam Integer categoryId) {
+        List<ProductFullDto> products = productService.findAllProductsByCategoryId(categoryId);
+        return ResponseEntity.ok(products);
+    }
 }
