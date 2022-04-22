@@ -6,6 +6,7 @@ import com.shop.webshop.mapper.CategoryMapper;
 import com.shop.webshop.model.Category;
 import com.shop.webshop.repository.CategoryRepository;
 import com.shop.webshop.service.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
