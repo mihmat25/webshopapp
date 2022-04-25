@@ -21,6 +21,16 @@ public class UserController {
         this.userService = userService;
     }
 
+    @PostMapping("/signup")
+    public ResponseEntity<UserFullDto> create(@RequestBody UserCreateDto userCreateDto) {
+        return new ResponseEntity<>(userService.signUp(userCreateDto), HttpStatus.OK);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<UserFullDto> login(@RequestBody UserCreateDto userCreateDto) {
+        return new ResponseEntity<>(userService.login(userCreateDto), HttpStatus.OK);
+    }
+
     @GetMapping("/findAll")
     public ResponseEntity<List<UserFullDto>> findAll() {
         List<UserFullDto> listOfUsers = userService.findAll();
@@ -30,16 +40,6 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<UserFullDto> getOne(@PathVariable Integer id) {
         return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);
-    }
-
-    @PostMapping("/signup")
-    public ResponseEntity<UserFullDto> create(@RequestBody UserCreateDto userCreateDto) {
-        return new ResponseEntity<>(userService.signUp(userCreateDto), HttpStatus.OK);
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<UserFullDto> login(@RequestBody UserCreateDto userCreateDto) {
-        return new ResponseEntity<>(userService.login(userCreateDto), HttpStatus.OK);
     }
 
     @PutMapping("/{userId}")
